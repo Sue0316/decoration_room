@@ -2,7 +2,7 @@ import { useMemo, useRef, useState } from "react";
 import type { DragEvent, PointerEvent as ReactPointerEvent } from "react";
 import { ROUND_TYPES, RUG_TYPES, WALL_TYPES } from "../catalog";
 import { finishId, finishImage, finishInfo } from "../finishes";
-import { area, bounds, COWHIDE_SPOTS, cowhideOutline, normDeg, round } from "../geometry";
+import { area, bounds, COWHIDE_SPOTS, cowhideOutline, normDeg, round, uOutline } from "../geometry";
 import type { Design, Item, Point } from "../types";
 
 interface Props {
@@ -248,6 +248,8 @@ function ItemShape({ item, unit, selected, bad, onDown }: { item: Item; unit: nu
               <ellipse key={`${sx},${sy}`} cx={(sx * item.w) / 2} cy={(sy * d) / 2} rx={(rx * item.w) / 2} ry={(ry * d) / 2} fill={item.color} />
             ))}
           </>
+        ) : item.type === "u_sofa" ? (
+          <polygon points={uOutline(item.w, d).map((p) => `${p.x},${p.y}`).join(" ")} fill={item.color} fillOpacity={0.92} className="body" />
         ) : (
           <rect
             x={-item.w / 2}
@@ -265,7 +267,7 @@ function ItemShape({ item, unit, selected, bad, onDown }: { item: Item; unit: nu
           const y = d / 2 - ((i + 1) * d) / steps;
           return <line key={i} x1={-item.w / 2} x2={item.w / 2} y1={y} y2={y} className="tread" />;
         })}
-        {!isWall && !isRound && !isRug && !steps && <line x1={-item.w / 2 + 0.05} x2={item.w / 2 - 0.05} y1={d / 2 - 0.05} y2={d / 2 - 0.05} className="front" />}
+        {!isWall && !isRound && !isRug && !steps && item.type !== "u_sofa" && <line x1={-item.w / 2 + 0.05} x2={item.w / 2 - 0.05} y1={d / 2 - 0.05} y2={d / 2 - 0.05} className="front" />}
       </g>
       {!isWall && size > unit * 0.3 && (
         <text x={item.x} y={item.y} fontSize={size} className="label">

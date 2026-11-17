@@ -21,6 +21,8 @@ export interface Item {
   h: number;
   rot: number;
   color: string;
+  /** Windows only: height of the bottom edge above the floor. Absent means a standard 0.9 m sill. */
+  z?: number;
 }
 
 export interface Design {

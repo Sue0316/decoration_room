@@ -1,0 +1,64 @@
+{
+  "format": "room-studio-room",
+  "version": 1,
+  "name": "Living room - clean luxury",
+  "design": {
+    "points": [
+      { "x": 0, "y": 0 },
+      { "x": 7.2, "y": 0 },
+      { "x": 7.2, "y": 4.2 },
+      { "x": 5.3, "y": 4.2 },
+      { "x": 5.3, "y": 5.5 },
+      { "x": 2.9, "y": 5.5 },
+      { "x": 2.9, "y": 4.2 },
+      { "x": 0, "y": 4.2 }
+    ],
+    "height": 2.7,
+    "wallColor": "#eee9e1",
+    "floorColor": "#c4a37c",
+    "wallFinish": "plain",
+    "floorFinish": "planks",
+    "items": [
+      { "id": "fireplace", "type": "fireplace", "label": "Marble fireplace", "x": 4.1, "y": 0.45, "w": 1, "d": 0.8, "h": 1.15, "rot": 0, "color": "#ece8e1" },
+      { "id": "win-top", "type": "window", "label": "Window", "x": 0.65, "y": 0, "w": 1, "d": 0.08, "h": 1.25, "rot": 0, "color": "#f1ece3" },
+      { "id": "win-left", "type": "window", "label": "Window", "x": 0, "y": 0.6, "w": 1, "d": 0.08, "h": 1.25, "rot": 270, "color": "#f1ece3" },
+      { "id": "win-bay-left", "type": "window", "label": "Bay window left", "x": 2.9, "y": 4.85, "w": 1, "d": 0.08, "h": 1.25, "rot": 270, "color": "#f1ece3" },
+      { "id": "win-bay-front", "type": "window", "label": "Bay window", "x": 4.1, "y": 5.5, "w": 1.3, "d": 0.08, "h": 1.25, "rot": 180, "color": "#f1ece3" },
+      { "id": "win-bay-right", "type": "window", "label": "Bay window right", "x": 5.3, "y": 4.85, "w": 1, "d": 0.08, "h": 1.25, "rot": 90, "color": "#f1ece3" },
+      { "id": "voiusgwa", "type": "door", "label": "Door", "x": 6.35526765287945, "y": 0, "w": 0.9, "d": 0.08, "h": 2.05, "rot": 0, "color": "#f1ece3" },
+      { "id": "rw9j0siu", "type": "window", "label": "Floor window", "x": 7.2, "y": 1.6543293608745546, "w": 2.45, "d": 0.08, "h": 2.3, "z": 0, "rot": 90, "color": "#f1ece3" },
+      { "id": "art-fireplace", "type": "wall_art", "label": "Art above fireplace", "x": 4.1, "y": 0, "w": 0.9, "d": 0.04, "h": 0.7, "rot": 0, "color": "#b89b7a" },
+
+      { "id": "shelf-l", "type": "bookshelf", "label": "Walnut bookcase", "x": 3.1, "y": 0.175, "w": 0.9, "d": 0.35, "h": 2.2, "rot": 0, "color": "#5e4130" },
+      { "id": "shelf-r", "type": "bookshelf", "label": "Walnut bookcase", "x": 5.1, "y": 0.175, "w": 0.9, "d": 0.35, "h": 2.2, "rot": 0, "color": "#5e4130" },
+
+      { "id": "rug", "type": "rug", "label": "Ivory wool rug", "x": 4.1, "y": 2.4, "w": 3.4, "d": 2.6, "h": 0.015, "rot": 0, "color": "#ddd3c3" },
+      { "id": "sofa", "type": "u_sofa", "label": "Black leather U sofa", "x": 4.1, "y": 2.55, "w": 3.0, "d": 2.0, "h": 0.8, "rot": 180, "color": "#1f1d1c" },
+      { "id": "coffee", "type": "round_coffee_table", "label": "Marble coffee table", "x": 4.1, "y": 2.1, "w": 0.7, "d": 0.7, "h": 0.4, "rot": 0, "color": "#e9e5df" },
+      { "id": "vase-coffee", "type": "vase", "label": "Brass vase", "x": 4.1, "y": 2.1, "w": 0.18, "d": 0.18, "h": 0.3, "rot": 0, "color": "#c8a45c" },
+      { "id": "lamp", "type": "floor_lamp", "label": "Brass floor lamp", "x": 5.37, "y": 0.95, "w": 0.38, "d": 0.38, "h": 1.65, "rot": 0, "color": "#c8a45c" },
+
+      { "id": "dining", "type": "round_dining_table", "label": "Oval walnut dining table", "x": 1.15, "y": 2.3, "w": 1.5, "d": 0.95, "h": 0.76, "rot": 90, "color": "#5e4130" },
+      { "id": "vase-dining", "type": "vase", "label": "Stone vase", "x": 1.15, "y": 2.3, "w": 0.18, "d": 0.18, "h": 0.32, "rot": 0, "color": "#d8cdbd" },
+      { "id": "pendant", "type": "pendant_lamp", "label": "Brass pendant", "x": 1.15, "y": 2.3, "w": 0.5, "d": 0.5, "h": 0.6, "rot": 0, "color": "#c8a45c" },
+      { "id": "dc-1", "type": "chair", "label": "Dining chair", "x": 0.415, "y": 1.95, "w": 0.48, "d": 0.52, "h": 0.85, "rot": 270, "color": "#d6ccbd" },
+      { "id": "dc-2", "type": "chair", "label": "Dining chair", "x": 0.415, "y": 2.65, "w": 0.48, "d": 0.52, "h": 0.85, "rot": 270, "color": "#d6ccbd" },
+      { "id": "dc-3", "type": "chair", "label": "Dining chair", "x": 1.885, "y": 1.95, "w": 0.48, "d": 0.52, "h": 0.85, "rot": 90, "color": "#d6ccbd" },
+      { "id": "dc-4", "type": "chair", "label": "Dining chair", "x": 1.885, "y": 2.65, "w": 0.48, "d": 0.52, "h": 0.85, "rot": 90, "color": "#d6ccbd" },
+      { "id": "dc-5", "type": "chair", "label": "Dining chair", "x": 1.15, "y": 1.29, "w": 0.48, "d": 0.52, "h": 0.85, "rot": 0, "color": "#d6ccbd" },
+      { "id": "dc-6", "type": "chair", "label": "Dining chair", "x": 1.15, "y": 3.31, "w": 0.48, "d": 0.52, "h": 0.85, "rot": 180, "color": "#d6ccbd" },
+      { "id": "credenza", "type": "dresser", "label": "Walnut credenza", "x": 1.95, "y": 0.225, "w": 1.3, "d": 0.45, "h": 0.8, "rot": 0, "color": "#5e4130" },
+      { "id": "vase-credenza", "type": "vase", "label": "Stone vase", "x": 2.35, "y": 0.22, "w": 0.18, "d": 0.18, "h": 0.32, "rot": 0, "color": "#d8cdbd" },
+
+      { "id": "sideboard", "type": "dresser", "label": "Walnut sideboard", "x": 6.25, "y": 3.975, "w": 1.6, "d": 0.45, "h": 0.8, "rot": 180, "color": "#5e4130" },
+      { "id": "vase-sideboard", "type": "vase", "label": "Stone vase", "x": 5.75, "y": 3.95, "w": 0.18, "d": 0.18, "h": 0.32, "rot": 0, "color": "#d8cdbd" },
+      { "id": "art-sideboard", "type": "wall_art", "label": "Art above sideboard", "x": 6.25, "y": 4.2, "w": 1.1, "d": 0.04, "h": 0.75, "rot": 180, "color": "#8c7a66" },
+      { "id": "plant-window", "type": "plant", "label": "Fiddle-leaf fig", "x": 6.9, "y": 3.25, "w": 0.5, "d": 0.5, "h": 1.6, "rot": 0, "color": "#4f7a55" },
+
+      { "id": "seat", "type": "bench", "label": "Storage window seat", "x": 4.1, "y": 5.22, "w": 1.3, "d": 0.45, "h": 0.46, "rot": 180, "color": "#e3dacb" },
+      { "id": "plant-bay-l", "type": "plant", "label": "Olive tree", "x": 3.18, "y": 5.2, "w": 0.5, "d": 0.5, "h": 1.4, "rot": 0, "color": "#5d7a58" },
+      { "id": "plant-bay-r", "type": "plant", "label": "Olive tree", "x": 5.02, "y": 5.2, "w": 0.5, "d": 0.5, "h": 1.4, "rot": 0, "color": "#5d7a58" },
+      { "id": "plant-dining", "type": "plant", "label": "Plant", "x": 0.35, "y": 3.85, "w": 0.45, "d": 0.45, "h": 1.1, "rot": 0, "color": "#4f7a55" }
+    ]
+  }
+}

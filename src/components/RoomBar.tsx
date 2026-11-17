@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { downloadRoom, parseRoomFile } from "../roomFile";
+import type { Design } from "../types";
 import type { SavedRoom } from "../useDesign";
 
 type Naming = "new" | "copy" | "rename";
@@ -7,6 +9,8 @@ interface Props {
   rooms: SavedRoom[];
   activeId: string;
   saved: boolean;
+  design: Design;
+  onImport(name: string, design: Design): void;
   onSwitch(id: string): void;
   onCreate(name: string): void;
   onCopy(name: string): void;
@@ -16,10 +20,20 @@ interface Props {
 
 const LABELS: Record<Naming, string> = { new: "Create", copy: "Save copy", rename: "Rename" };
 
-export function RoomBar({ rooms, activeId, saved, onSwitch, onCreate, onCopy, onRename, onDelete }: Props) {
+export function RoomBar({ rooms, activeId, saved, design, onImport, onSwitch, onCreate, onCopy, onRename, onDelete }: Props) {
   const [naming, setNaming] = useState<Naming | null>(null);
   const [text, setText] = useState("");
+  const fileRef = useRef<HTMLInputElement>(null);
   const active = rooms.find((r) => r.id === activeId);
+
+  const importFile = async (file: File) => {
+    try {
+      const room = parseRoomFile(await file.text(), file.name.replace(/(\.room)?\.json$/i, ""));
+      onImport(room.name, room.design);
+    } catch (e) {
+      window.alert(e instanceof Error ? e.message : "This file couldn't be read.");
+    }
+  };
 
   const start = (mode: Naming) => {
     setNaming(mode);
@@ -84,6 +98,24 @@ export function RoomBar({ rooms, activeId, saved, onSwitch, onCreate, onCopy, on
       >
         Delete
       </button>
+      <button title="Download this room as a file" onClick={() => downloadRoom(active?.name ?? "room", design)}>
+        Export
+      </button>
+      <button title="Open a room file as a new room" onClick={() => fileRef.current?.click()}>
+        Import
+      </button>
+      <input
+        ref={fileRef}
+        type="file"
+        accept=".json,application/json"
+        hidden
+        data-testid="import-file"
+        onChange={(e) => {
+          const file = e.target.files?.[0];
+          e.target.value = "";
+          if (file) importFile(file);
+        }}
+      />
       <span className={saved ? "saved" : "saved failed"} data-testid="save-state">
         {saved ? "Saved" : "Not saved: browser storage is full or blocked"}
       </span>

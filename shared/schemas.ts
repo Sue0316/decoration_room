@@ -32,6 +32,9 @@ export const FURNITURE_TYPES = [
   "round_rug",
   "cowhide_rug",
   "striped_rug",
+  "fireplace",
+  "heater",
+  "u_sofa",
   "box",
 ] as const;
 

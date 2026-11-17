@@ -27,7 +27,7 @@ export const emptyDesign = (): Design => ({
   items: [],
 });
 
-const isDesign = (d: Design | undefined): d is Design => Array.isArray(d?.points) && d.points.length >= 3 && Array.isArray(d.items);
+export const isDesign = (d: Design | undefined): d is Design => Array.isArray(d?.points) && d.points.length >= 3 && Array.isArray(d.items);
 
 function loadLibrary(): Library {
   try {
@@ -141,7 +141,17 @@ export function useDesign() {
     open(room.id, [...roomsWithCurrent(), room]);
   };
 
-  const renameRoom = (name: string) => setRooms((list) => list.map((r) => (r.id === activeId ? { ...r, name } : r)));
+  /** Adds a room read from a file, keeping names unique, and opens it. */
+  const importRoom = (name: string, design: Design) => {
+    const list = roomsWithCurrent();
+    const taken = new Set(list.map((r) => r.name));
+    let unique = name;
+    for (let n = 2; taken.has(unique); n++) unique = `${name} (${n})`;
+    const room = { id: uid(), name: unique, design };
+    open(room.id, [...list, room]);
+  };
+
+  const renameRoom =(name: string) => setRooms((list) => list.map((r) => (r.id === activeId ? { ...r, name } : r)));
 
   const deleteRoom = () => {
     const remaining = roomsWithCurrent().filter((r) => r.id !== activeId);
@@ -163,6 +173,7 @@ export function useDesign() {
     switchRoom,
     createRoom,
     copyRoom,
+    importRoom,
     renameRoom,
     deleteRoom,
   };

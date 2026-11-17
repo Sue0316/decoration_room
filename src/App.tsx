@@ -51,7 +51,7 @@ function placeNear(design: Design, item: Item, target?: Point): Item {
 }
 
 export function App() {
-  const { design, patch, commit, checkpoint, undo, redo, canUndo, canRedo, rooms, activeId, saved, switchRoom, createRoom, copyRoom, renameRoom, deleteRoom } = useDesign();
+  const { design, patch, commit, checkpoint, undo, redo, canUndo, canRedo, rooms, activeId, saved, switchRoom, createRoom, copyRoom, importRoom, renameRoom, deleteRoom } = useDesign();
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [view, setView] = useState<View>("split");
   const [tab, setTab] = useState<Tab>("furniture");
@@ -234,6 +234,11 @@ export function App() {
           rooms={rooms}
           activeId={activeId}
           saved={saved}
+          design={design}
+          onImport={(name, d) => {
+            importRoom(name, d);
+            afterRoomChange();
+          }}
           onSwitch={(id) => {
             switchRoom(id);
             afterRoomChange();

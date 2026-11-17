@@ -1,9 +1,10 @@
 import * as THREE from "three";
 import { SURFACE_TYPES } from "./catalog";
-import { corners, COWHIDE_SPOTS, cowhideOutline, inside } from "./geometry";
+import { corners, COWHIDE_SPOTS, cowhideOutline, inside, uSeat } from "./geometry";
 import type { Item } from "./types";
 
-const WHITE = new THREE.Color("#ffffff");
+export const WINDOW_SILL = 0.9;
+const WHITE =new THREE.Color("#ffffff");
 const WOOD = new THREE.Color("#7a5a3e");
 const METAL = new THREE.Color("#3a3a3c");
 const LINEN = new THREE.Color("#f3eee4");
@@ -198,6 +199,48 @@ export function buildFurniture(item: Item): THREE.Group {
       box(w, 0.035, 0.02, 0, 0.05 + h / 2, t / 2 + 0.008, c);
       break;
     }
+    case "fireplace": {
+      // A chimney breast with a mantel shelf and a dark firebox opening on the front.
+      const shelf = 0.06;
+      const body = h - shelf;
+      box(w, body, d, 0, 0, 0);
+      box(w + 0.1, shelf, Math.min(0.25, d * 0.4), 0, body, d / 2 - Math.min(0.25, d * 0.4) / 2 + 0.04, light);
+      const openW = w * 0.6;
+      const openH = Math.min(0.75, body * 0.65);
+      box(openW, openH, 0.02, 0, 0.1, d / 2 + 0.002, new THREE.Color("#1f1b18"), { roughness: 0.95 });
+      box(w + 0.12, 0.04, 0.4, 0, 0, d / 2 + 0.18, new THREE.Color("#4b4744"));
+      break;
+    }
+    case "u_sofa": {
+      // Back section along -z and two returns down the sides, open at the front (+z).
+      const s = uSeat(w, d);
+      const backD = Math.min(0.22, s * 0.3);
+      const inner = s - backD;
+      const seatY = h * 0.3;
+      const cushH = h * 0.18;
+      const leather = { roughness: 0.45 };
+      const cushion = c.clone().lerp(WHITE, 0.1);
+      box(w, seatY, s, 0, 0, -d / 2 + s / 2, dark, leather);
+      box(w, h, backD, 0, 0, -d / 2 + backD / 2, c, leather);
+      box(w - 2 * backD - 0.02, cushH, inner - 0.02, 0, seatY, -d / 2 + backD + inner / 2, cushion, leather);
+      for (const sx of [-1, 1]) {
+        box(s, seatY, d - s, sx * (w / 2 - s / 2), 0, s / 2, dark, leather);
+        box(backD, h, d - backD, sx * (w / 2 - backD / 2), 0, backD / 2, c, leather);
+        box(inner - 0.02, cushH, d - s - 0.02, sx * (w / 2 - backD - inner / 2), seatY, s / 2, cushion, leather);
+      }
+      break;
+    }
+    case "heater": {
+      // A column radiator on two feet, its back against the wall (-z).
+      const lift = Math.min(0.12, h * 0.2);
+      const body = h - lift;
+      const cols = Math.max(4, Math.round(w / 0.06));
+      const step = w / cols;
+      for (let i = 0; i < cols; i++) box(step * 0.72, body, d * 0.75, -w / 2 + step * (i + 0.5), lift, 0, c, { roughness: 0.4 });
+      for (const y of [lift + 0.03, h - 0.06]) box(w, 0.03, d * 0.35, 0, y, 0, c, { roughness: 0.4 });
+      for (const s of [-1, 1]) box(0.04, lift, d * 0.6, s * (w / 2 - step), 0, 0, dark);
+      break;
+    }
     case "stairs": {
       // The bottom step is at the front (+z); the flight climbs towards -z.
       const steps = Math.max(3, Math.round(h / 0.18));
@@ -289,7 +332,8 @@ export function elevation(item: Item, ceiling: number, items: Item[]): number {
     return Math.max(0, ...under.map((o) => o.h));
   }
   if (item.type === "pendant_lamp") return ceiling - item.h;
-  if (item.type === "window") return 0.9;
+  // The frame adds 0.1 m on top, and the window never pokes through the ceiling.
+  if (item.type === "window") return Math.max(0, Math.min(item.z ?? WINDOW_SILL, ceiling - item.h - 0.1));
   if (item.type === "wall_art") return Math.min(1.35, ceiling - item.h - 0.1);
   return 0;
 }

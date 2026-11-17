@@ -1,0 +1,143 @@
+{
+  "format": "room-studio-room",
+  "version": 1,
+  "name": "Living room",
+  "design": {
+    "points": [
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 7.2,
+        "y": 0
+      },
+      {
+        "x": 7.2,
+        "y": 4.2
+      },
+      {
+        "x": 5.3,
+        "y": 4.2
+      },
+      {
+        "x": 5.3,
+        "y": 5.5
+      },
+      {
+        "x": 2.9,
+        "y": 5.5
+      },
+      {
+        "x": 2.9,
+        "y": 4.2
+      },
+      {
+        "x": 0,
+        "y": 4.2
+      }
+    ],
+    "height": 2.7,
+    "wallColor": "#ece6da",
+    "floorColor": "#c9a97f",
+    "items": [
+      {
+        "id": "fireplace",
+        "type": "fireplace",
+        "label": "Fireplace",
+        "x": 4.1000000000000005,
+        "y": 0.45,
+        "w": 1,
+        "d": 0.8,
+        "h": 1.15,
+        "rot": 0,
+        "color": "#e8e2d8"
+      },
+      {
+        "id": "win-top",
+        "type": "window",
+        "label": "Window",
+        "x": 0.65,
+        "y": 0,
+        "w": 1,
+        "d": 0.08,
+        "h": 1.25,
+        "rot": 0,
+        "color": "#f1ece3"
+      },
+      {
+        "id": "win-left",
+        "type": "window",
+        "label": "Window",
+        "x": 0,
+        "y": 0.6,
+        "w": 1,
+        "d": 0.08,
+        "h": 1.25,
+        "rot": 270,
+        "color": "#f1ece3"
+      },
+      {
+        "id": "win-bay-left",
+        "type": "window",
+        "label": "Bay window left",
+        "x": 2.9,
+        "y": 4.85,
+        "w": 1,
+        "d": 0.08,
+        "h": 1.25,
+        "rot": 270,
+        "color": "#f1ece3"
+      },
+      {
+        "id": "win-bay-front",
+        "type": "window",
+        "label": "Bay window",
+        "x": 4.1,
+        "y": 5.5,
+        "w": 1.3,
+        "d": 0.08,
+        "h": 1.25,
+        "rot": 180,
+        "color": "#f1ece3"
+      },
+      {
+        "id": "win-bay-right",
+        "type": "window",
+        "label": "Bay window right",
+        "x": 5.3,
+        "y": 4.85,
+        "w": 1,
+        "d": 0.08,
+        "h": 1.25,
+        "rot": 90,
+        "color": "#f1ece3"
+      },
+      {
+        "id": "voiusgwa",
+        "type": "door",
+        "label": "Door",
+        "w": 0.9,
+        "d": 0.08,
+        "h": 2.05,
+        "color": "#f1ece3",
+        "x": 6.35526765287945,
+        "y": 0,
+        "rot": 0
+      },
+      {
+        "id": "rw9j0siu",
+        "type": "window",
+        "label": "Floor window",
+        "w": 2.45,
+        "d": 0.08,
+        "h": 2.3,
+        "z": 0,
+        "color": "#f1ece3",
+        "x": 7.2,
+        "y": 1.6543293608745546,
+        "rot": 90
+      }
+    ]
+  }
+}

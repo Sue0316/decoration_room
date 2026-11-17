@@ -102,7 +102,8 @@ export function resnapWallItems(design: Design): Design {
   };
 }
 
-export function corners(it: Item): Point[] {
+/** Corners on the plan of a rectangle given in the item's own coordinates. */
+function rectCorners(it: Item, cx: number, cy: number, w: number, d: number): Point[] {
   const r = (it.rot * Math.PI) / 180;
   const c = Math.cos(r);
   const s = Math.sin(r);
@@ -112,10 +113,37 @@ export function corners(it: Item): Point[] {
     [1, 1],
     [-1, 1],
   ].map(([u, v]) => {
-    const lx = (u * it.w) / 2;
-    const ly = (v * it.d) / 2;
+    const lx = cx + (u * w) / 2;
+    const ly = cy + (v * d) / 2;
     return { x: it.x + lx * c - ly * s, y: it.y + lx * s + ly * c };
   });
+}
+
+export function corners(it: Item): Point[] {
+  return rectCorners(it, 0, 0, it.w, it.d);
+}
+
+/** Seat depth of a U-shaped sofa: its back section and both returns. */
+export const uSeat = (w: number, d: number) => Math.min(0.85, w * 0.3, d * 0.45);
+
+/** A U-shaped sofa's outline in its own coordinates, open at the front (+y). */
+export function uOutline(w: number, d: number): Point[] {
+  const s = uSeat(w, d);
+  return [
+    [-w / 2, -d / 2], [w / 2, -d / 2], [w / 2, d / 2], [w / 2 - s, d / 2], [w / 2 - s, -d / 2 + s],
+    [-w / 2 + s, -d / 2 + s], [-w / 2 + s, d / 2], [-w / 2, d / 2],
+  ].map(([x, y]) => ({ x, y }));
+}
+
+/** The rectangles an item really occupies, so a table can stand inside a U-shaped sofa. */
+export function footprints(it: Item): Point[][] {
+  if (it.type !== "u_sofa") return [corners(it)];
+  const s = uSeat(it.w, it.d);
+  return [
+    rectCorners(it, 0, -it.d / 2 + s / 2, it.w, s),
+    rectCorners(it, -it.w / 2 + s / 2, s / 2, s, it.d - s),
+    rectCorners(it, it.w / 2 - s / 2, s / 2, s, it.d - s),
+  ];
 }
 
 function overlaps(a: Point[], b: Point[]): boolean {
@@ -137,21 +165,22 @@ function overlaps(a: Point[], b: Point[]): boolean {
 export function findProblems(design: Design): Set<string> {
   const bad = new Set<string>();
   const solid = design.items.filter((i) => !WALL_TYPES.includes(i.type));
-  const rects = new Map(solid.map((i) => [i.id, corners(i)]));
+  const rects = new Map(solid.map((i) => [i.id, footprints(i)]));
   for (const it of solid) {
     if (it.type === "pendant_lamp") {
       if (!inside(it, design.points)) bad.add(it.id);
       continue;
     }
     // A corner resting exactly on a wall should not count as outside.
-    const c = rects.get(it.id)!;
+    const c = rects.get(it.id)!.flat();
     const out = c.some((p) => !inside(p, design.points) && nearestWall(p, design.points).dist > 0.02);
     if (out) bad.add(it.id);
   }
   const blockers = solid.filter((i) => !LAYER_TYPES.includes(i.type));
+  const clash = (a: Point[][], b: Point[][]) => a.some((pa) => b.some((pb) => overlaps(pa, pb)));
   for (let i = 0; i < blockers.length; i++) {
     for (let j = i + 1; j < blockers.length; j++) {
-      if (overlaps(rects.get(blockers[i].id)!, rects.get(blockers[j].id)!)) {
+      if (clash(rects.get(blockers[i].id)!, rects.get(blockers[j].id)!)) {
         bad.add(blockers[i].id);
         bad.add(blockers[j].id);
       }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { WALL_TYPES } from "../catalog";
 import { finishId, finishImage, finishInfo, FLOOR_FINISHES, WALL_FINISHES } from "../finishes";
 import type { FinishId } from "../finishes";
+import { WINDOW_SILL } from "../furniture3d";
 import { area, bounds, normDeg } from "../geometry";
 import type { Design, Item } from "../types";
 
@@ -55,6 +56,14 @@ export function Inspector({ design, selected, hasProblem, onItem, onRemove, onDu
           {!isWall && <Num label="Depth (m)" value={selected.d} min={0.05} max={8} step={0.05} onChange={(d) => onItem(selected.id, { d })} />}
           <Num label="Height (m)" value={selected.h} min={0.01} max={6} step={0.05} onChange={(h) => onItem(selected.id, { h })} />
         </div>
+        {selected.type === "window" && (
+          <div className="row">
+            <Num label="Sill height (m)" value={selected.z ?? WINDOW_SILL} min={0} max={3} step={0.05} onChange={(z) => onItem(selected.id, { z })} />
+            <button className="align-end" onClick={() => onItem(selected.id, { z: 0, h: Math.max(0.5, Math.round((design.height - 0.4) * 100) / 100) })}>
+              Make floor-length
+            </button>
+          </div>
+        )}
         {!isWall && (
           <div className="row">
             <Num label="Rotation (°)" value={selected.rot} min={0} max={359} step={15} onChange={(rot) => onItem(selected.id, { rot })} />

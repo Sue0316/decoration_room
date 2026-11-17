@@ -7,6 +7,7 @@ export interface CatalogEntry {
   d: number;
   h: number;
   color: string;
+  z?: number;
 }
 
 export const CATALOG: { group: string; entries: CatalogEntry[] }[] = [
@@ -14,6 +15,7 @@ export const CATALOG: { group: string; entries: CatalogEntry[] }[] = [
     group: "Seating",
     entries: [
       { type: "sofa", label: "Sofa", w: 2.1, d: 0.92, h: 0.82, color: "#8a9a8b" },
+      { type: "u_sofa", label: "U-shaped sofa", w: 3.0, d: 2.2, h: 0.8, color: "#6f6a64" },
       { type: "armchair", label: "Armchair", w: 0.85, d: 0.85, h: 0.82, color: "#c08552" },
       { type: "chair", label: "Chair", w: 0.46, d: 0.5, h: 0.85, color: "#a47551" },
       { type: "stool", label: "Stool", w: 0.38, d: 0.38, h: 0.65, color: "#a47551" },
@@ -72,11 +74,14 @@ export const CATALOG: { group: string; entries: CatalogEntry[] }[] = [
     ],
   },
   {
-    group: "Doors, windows and stairs",
+    group: "Doors, windows and built-ins",
     entries: [
+      { type: "fireplace", label: "Fireplace", w: 1.0, d: 0.8, h: 1.15, color: "#e8e2d8" },
+      { type: "heater", label: "Heater", w: 1.0, d: 0.1, h: 0.6, color: "#f4f2ee" },
       { type: "stairs", label: "Stairs", w: 0.95, d: 3.0, h: 2.7, color: "#a9825c" },
       { type: "door", label: "Door", w: 0.9, d: 0.08, h: 2.05, color: "#f1ece3" },
       { type: "window", label: "Window", w: 1.4, d: 0.08, h: 1.25, color: "#f1ece3" },
+      { type: "window", label: "Floor window", w: 1.2, d: 0.08, h: 2.3, z: 0, color: "#f1ece3" },
     ],
   },
 ];
